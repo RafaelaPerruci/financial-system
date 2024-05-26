@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -21,8 +22,11 @@ public class CategoriaController {
 
     @PostMapping
     @Transactional
-    public void cadastrarCategoria(@RequestBody @Valid DadosCadastroCategoria categoria) {
-        categoriaRepository.save(new Categoria(categoria));
+    public ResponseEntity cadastrarCategoria(@RequestBody @Valid DadosCadastroCategoria dados, UriComponentsBuilder uriBuilder) {
+        var categoria = new Categoria(dados);
+        categoriaRepository.save(categoria);
+        var uri = uriBuilder.path("categoria/{id}").buildAndExpand(categoria.getId()).toUri();
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoCategoria(categoria));
     }
 
     @GetMapping

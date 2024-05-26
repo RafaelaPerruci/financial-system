@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -28,13 +29,15 @@ public class LancamentoController {
 
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody @Valid DadosCadastroLancamento dados) {
-        var categoria = categoriaRepository.getReferenceById(dados.idCategoria());
-        var pessoa = pessoaRepository.getReferenceById(dados.idPessoa());
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroLancamento dados, UriComponentsBuilder uriBuilder) {
+        var categoria = categoriaRepository.findByIdAndAtivoTrue(dados.idCategoria());
+        var pessoa = pessoaRepository.findByIdAndAtivoTrue(dados.idPessoa());
         var lancamento = new Lancamento(dados);
         lancamento.setCategoria(categoria);
         lancamento.setPessoa(pessoa);
         lancamentoRepository.save(lancamento);
+        var uri = uriBuilder.path("/lancamentos/{id}").buildAndExpand(lancamento.getId()).toUri();
+        return ResponseEntity.created(uri).body(lancamento);
     }
 
     @GetMapping
