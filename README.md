@@ -6,4 +6,15 @@ pelo professor Antônio Junio da Mata.
 Diagrama de classes do sistema financeiro desenvolvido:
 
 
-![diagrama-de-classes](sistema-financeiro.png "título")
+![diagrama-de-classes](sistema-financeiro.png "título")  
+- Domain
+  - Pessoa
+  - Categoria
+  - Lancamento
+  - Endereco 
+- Serviços
+  - CRUD de lançamentos
+  - CRUD de pessoas
+  - CRUD de categorias 
+- Tratamendo de erros personalizados
+  - Classe [ResourceExceptionHandler.java](src%2Fmain%2Fjava%2Fbr%2Fcom%2Ffinancialsystem%2Fapi%2Finfra%2FResourceExceptionHandler.java) 
