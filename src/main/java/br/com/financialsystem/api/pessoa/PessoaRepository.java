@@ -1,6 +1,5 @@
 package br.com.financialsystem.api.pessoa;
 
-import br.com.financialsystem.api.categoria.Categoria;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

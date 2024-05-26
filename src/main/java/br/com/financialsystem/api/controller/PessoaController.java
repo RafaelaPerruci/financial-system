@@ -1,6 +1,5 @@
 package br.com.financialsystem.api.controller;
 
-import br.com.financialsystem.api.lancamento.DadosCadastroLancamento;
 import br.com.financialsystem.api.pessoa.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -11,8 +10,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("pessoa")
@@ -33,6 +30,7 @@ public class PessoaController {
     @GetMapping
     public ResponseEntity<Page<DadosListagemPessoa>> listarPessoas(@PageableDefault(size = 10, sort
             = {"nome"}) Pageable pageable) {
+        Object DadosListagemPessoa;
         var page = pessoaRepository.findByAtivoTrue(pageable).map(DadosListagemPessoa::new);
         return ResponseEntity.ok(page);
     }

@@ -1,6 +1,5 @@
 package br.com.financialsystem.api.controller;
 
-import br.com.financialsystem.api.categoria.Categoria;
 import br.com.financialsystem.api.categoria.CategoriaRepository;
 import br.com.financialsystem.api.lancamento.*;
 import br.com.financialsystem.api.pessoa.PessoaRepository;
@@ -13,8 +12,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("lancamentos")
