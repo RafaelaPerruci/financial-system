@@ -46,9 +46,14 @@ public class CategoriaController {
     }
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<Object> excluirCategoria(@PathVariable Long id) {
+    public ResponseEntity excluirCategoria(@PathVariable Long id) {
         var categoria = categoriaRepository.getReferenceById(id);
         categoria.excluir();
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity findById(@PathVariable Long id) {
+        var categoria = categoriaRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoCategoria(categoria));
     }
 }

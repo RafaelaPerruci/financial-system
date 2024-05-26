@@ -61,4 +61,9 @@ public class LancamentoController {
         lancamento.excluir();
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/{id}")
+    public ResponseEntity findById(@PathVariable Long id) {
+        var lancamento = lancamentoRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoLancamento(lancamento));
+    }
 }
